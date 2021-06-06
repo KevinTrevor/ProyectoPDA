@@ -44,4 +44,12 @@ public class TablaHash {
             }
         }
     }
+    
+    public void buscar(String clave){
+    
+    }
+    
+    public void eliminar(String clave){
+    
+    }
 }
