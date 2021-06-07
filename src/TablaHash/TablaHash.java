@@ -100,15 +100,17 @@ public class TablaHash {
         for(int i = 0; i < tamaño; i++){
             for(Producto p : tabla[i]){
                 if(p != null){
-                    System.out.println(p.toString()+"\n");
+                    if(p.getCantidad() > 0 && !p.getReferencia().equals("*")){
+                        System.out.println(p.toString()+"\n");
+                    }
                 }
             }
         }
         return "";
     }
     
-    /*public static void main(String[] args) throws Exception{
-        Producto p = new Producto("ASD","Coco Blanchett", "Lapiz", 20, 1.2, new Fecha(07,06,2021));
+    public static void main(String[] args) throws Exception{
+        Producto p = new Producto("ASD","Coco Blanchett", "Lapiz", 0, 1.2, new Fecha(07,06,2021));
         Producto p1 = new Producto("DSA","Enrico Pucci", "Lapiz", 40, 1.2, new Fecha(07,06,2021));
         TablaHash t = new TablaHash(15);
         
@@ -116,5 +118,5 @@ public class TablaHash {
         t.ingresar(p1.getReferencia(), p1);
         
         System.out.println(t.toString());
-    }*/
+    }
 }
