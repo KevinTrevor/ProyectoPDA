@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package TablaHash;
 
 import ClasesPrincipales.Producto;
@@ -16,11 +11,20 @@ public class TablaHash {
     LinkedList<Producto>[] tabla;
     int tamaño;
     
+    /**
+     *
+     * @param max
+     */
     public TablaHash(int max){
         tamaño = max;
         tabla = new LinkedList[max];
     }
     
+    /**
+     *
+     * @param clave
+     * @return
+     */
     public int hash(String clave){
         int valorClave = 0;
         for(int i = 0; i < clave.length(); i++){
@@ -29,6 +33,11 @@ public class TablaHash {
         return valorClave % tamaño;
     }
     
+    /**
+     *
+     * @param clave
+     * @param valor
+     */
     public void ingresar(String clave, Producto valor){
         int indice = hash(clave);
         if(tabla[indice].isEmpty()){
@@ -45,6 +54,12 @@ public class TablaHash {
         }
     }
     
+    /**
+     *
+     * @param clave
+     * @return
+     * @throws Exception
+     */
     public Producto buscar(String clave) throws Exception{
         int indice = hash(clave);
         Producto buscado = null;
@@ -61,10 +76,17 @@ public class TablaHash {
         return buscado;
     }
     
+    /**
+     *
+     * @param clave
+     */
     public void eliminar(String clave){
     
     }
     
+    /**
+     *
+     */
     public void modificar(){
         
     }
