@@ -64,4 +64,8 @@ public class TablaHash {
     public void eliminar(String clave){
     
     }
+    
+    public void modificar(){
+        
+    }
 }
