@@ -1,6 +1,6 @@
 package TablaHash;
 
-import ClasesPrincipales.Producto;
+import ClasesPrincipales.*;
 import java.util.*;
 
 /**
@@ -18,6 +18,9 @@ public class TablaHash {
     public TablaHash(int max){
         tamaño = max;
         tabla = new LinkedList[max];
+        for(int i = 0; i < max; i++){
+            tabla[i] = new LinkedList<Producto>();
+        }
     }
     
     /**
@@ -91,4 +94,26 @@ public class TablaHash {
             ingresar(clave, eliminado);
         }
     }
+    
+    public String toString(){
+        for(int i = 0; i < tamaño; i++){
+            for(Producto p : tabla[i]){
+                if(p != null){
+                    System.out.println(p.toString()+"\n");
+                }
+            }
+        }
+        return "";
+    }
+    
+    /*public static void main(String[] args) throws Exception{
+        Producto p = new Producto("ASD","Coco Blanchett", "Lapiz", 20, 1.2, new Fecha(07,06,2021));
+        Producto p1 = new Producto("DSA","Enrico Pucci", "Lapiz", 40, 1.2, new Fecha(07,06,2021));
+        TablaHash t = new TablaHash(15);
+        
+        t.ingresar(p.getReferencia(), p);
+        t.ingresar(p1.getReferencia(), p1);
+        
+        System.out.println(t.toString());
+    }*/
 }

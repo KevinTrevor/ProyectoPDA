@@ -39,6 +39,14 @@ public class Producto {
     public void disminuirCantidad(int decremento){
         cantidad = cantidad - decremento;
     }
+    
+    @Override
+    public String toString(){
+        return ("Referencia del producto: "+referencia+
+                "\nMarca del producto: "+distribuidor+
+                "\nNombre del producto: "+nombreProducto +
+                "\nCantidad del producto: "+cantidad);
+    }
      // Métodos Getter 
 
     public String getReferencia() {
