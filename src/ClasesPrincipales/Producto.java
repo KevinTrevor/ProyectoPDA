@@ -32,10 +32,13 @@ public class Producto {
         return referencia.equals(valor.referencia);
     }
     
-    public void aumentarCantidad(Producto valor){
-        cantidad = cantidad + valor.cantidad;
+    public void aumentarCantidad(int aumento){
+        cantidad = cantidad + aumento;
     }
     
+    public void disminuirCantidad(int decremento){
+        cantidad = cantidad - decremento;
+    }
      // Métodos Getter 
 
     public String getReferencia() {
@@ -61,4 +64,32 @@ public class Producto {
     public Fecha getUltimaSalida() {
         return ultimaSalida;
     }
+    
+    // Métodos Setter
+
+    public void setReferencia(String referencia) {
+        this.referencia = referencia;
+    }
+
+    public void setDistribuidor(String distribuidor) {
+        this.distribuidor = distribuidor;
+    }
+
+    public void setNombreProducto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public void setUltimaSalida(Fecha ultimaSalida) {
+        this.ultimaSalida = ultimaSalida;
+    }
+    
+    
 }

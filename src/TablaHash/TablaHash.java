@@ -46,7 +46,7 @@ public class TablaHash {
         else{
             int posicionProducto = tabla[indice].indexOf(valor);
             if(posicionProducto != -1){
-                tabla[indice].get(posicionProducto).aumentarCantidad(valor);
+                tabla[indice].set(posicionProducto, valor);
             }
             else{
                 tabla[indice].addLast(valor);
@@ -64,7 +64,7 @@ public class TablaHash {
         int indice = hash(clave);
         Producto buscado = null;
         if(tabla[indice].isEmpty()){
-            throw new Exception("No hay elementos guardados en la posición determinada");
+            throw new Exception("No hay elementos guardados en la posición determinada.");
         }
         else{
             for(Producto p : tabla[indice]){
@@ -79,15 +79,16 @@ public class TablaHash {
     /**
      *
      * @param clave
+     * @throws Exception
      */
-    public void eliminar(String clave){
-    
-    }
-    
-    /**
-     *
-     */
-    public void modificar(){
-        
+    public void eliminar(String clave) throws Exception{
+        Producto eliminado = buscar(clave);
+        if(eliminado == null){
+            throw new Exception("Clave de producto no existe.");
+        }
+        else{
+            eliminado.setReferencia("*");
+            ingresar(clave, eliminado);
+        }
     }
 }
