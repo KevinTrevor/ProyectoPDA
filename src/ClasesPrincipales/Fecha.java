@@ -34,5 +34,17 @@ public class Fecha {
         return año;
     }
     
-    
+    // Métodos Setter
+
+    public void setDia(int d) {
+        this.dia = d;
+    }
+
+    public void setMes(int m) {
+        this.mes = m;
+    }
+
+    public void setAño(int y) {
+        this.año = y;
+    }
 }

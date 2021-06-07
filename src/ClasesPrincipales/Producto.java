@@ -27,8 +27,8 @@ public class Producto {
     }
     
     @Override
-    public boolean equals(Object o){
-        Producto valor = (Producto) o;
+    public boolean equals(Object obj){
+        Producto valor = (Producto) obj;
         return referencia.equals(valor.referencia);
     }
     
@@ -67,29 +67,27 @@ public class Producto {
     
     // Métodos Setter
 
-    public void setReferencia(String referencia) {
-        this.referencia = referencia;
+    public void setReferencia(String ref) {
+        this.referencia = ref;
     }
 
-    public void setDistribuidor(String distribuidor) {
-        this.distribuidor = distribuidor;
+    public void setDistribuidor(String dis) {
+        this.distribuidor = dis;
     }
 
-    public void setNombreProducto(String nombreProducto) {
-        this.nombreProducto = nombreProducto;
+    public void setNombreProducto(String nom) {
+        this.nombreProducto = nom;
     }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public void setCantidad(int cant) {
+        this.cantidad = cant;
     }
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
+    public void setPrecio(double price) {
+        this.precio = price;
     }
 
-    public void setUltimaSalida(Fecha ultimaSalida) {
-        this.ultimaSalida = ultimaSalida;
+    public void setUltimaSalida(Fecha f) {
+        this.ultimaSalida = f;
     }
-    
-    
 }
