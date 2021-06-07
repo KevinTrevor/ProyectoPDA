@@ -95,6 +95,7 @@ public class TablaHash {
         }
     }
     
+    @Override
     public String toString(){
         for(int i = 0; i < tamaño; i++){
             for(Producto p : tabla[i]){
