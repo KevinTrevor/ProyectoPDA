@@ -45,8 +45,20 @@ public class TablaHash {
         }
     }
     
-    public void buscar(String clave){
-    
+    public Producto buscar(String clave) throws Exception{
+        int indice = hash(clave);
+        Producto buscado = null;
+        if(tabla[indice].isEmpty()){
+            throw new Exception("No hay elementos guardados en la posición determinada");
+        }
+        else{
+            for(Producto p : tabla[indice]){
+                if(p.getReferencia().equals(clave)){
+                    buscado = p;
+                }
+            }
+        }
+        return buscado;
     }
     
     public void eliminar(String clave){
