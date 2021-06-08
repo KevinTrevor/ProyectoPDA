@@ -19,8 +19,16 @@ public class TablaHash {
         tamaño = max;
         tabla = new LinkedList[max];
         for(int i = 0; i < max; i++){
-            tabla[i] = new LinkedList<Producto>();
+            tabla[i] = new LinkedList();
         }
+    }
+    
+    public int getTamaño(){
+        return tamaño;
+    }
+    
+    public LinkedList<Producto>[] getTabla(){
+        return tabla;
     }
     
     /**
@@ -41,7 +49,7 @@ public class TablaHash {
      * @param clave
      * @param valor
      */
-    public void ingresar(String clave, Producto valor){
+    private void ingresar(String clave, Producto valor){
         int indice = hash(clave);
         if(tabla[indice].isEmpty()){
             tabla[indice].addLast(valor);
@@ -57,17 +65,20 @@ public class TablaHash {
         }
     }
     
+    public void ingresar(Producto prod){
+        ingresar(prod.getReferencia(), prod);
+    }
+    
     /**
      *
      * @param clave
      * @return
-     * @throws Exception
      */
-    public Producto buscar(String clave) throws Exception{
+    public Producto buscar(String clave){
         int indice = hash(clave);
         Producto buscado = null;
         if(tabla[indice].isEmpty()){
-            throw new Exception("No hay elementos guardados en la posición determinada.");
+            return null;
         }
         else{
             for(Producto p : tabla[indice]){

@@ -10,12 +10,12 @@ package ClasesPrincipales;
  * @author Kevin Rojas
  */
 public class Producto {
-    String referencia;
-    String distribuidor;
-    String nombreProducto;
-    int cantidad;
-    double precio;
-    Fecha ultimaSalida;
+    private String referencia;
+    private String distribuidor;
+    private String nombreProducto;
+    private int cantidad;
+    private double precio;
+    private Fecha ultimaSalida;
     
     public Producto(String ref, String dis, String nom, int cant, double price, Fecha fe){
         referencia = ref;

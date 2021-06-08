@@ -10,9 +10,9 @@ package ClasesPrincipales;
  * @author Kevin Rojas
  */
 public class Fecha {
-    int dia;
-    int mes;
-    int año;
+    private int dia;
+    private int mes;
+    private int año;
     
     public Fecha(int d, int m, int y){
         dia = d;
@@ -46,5 +46,10 @@ public class Fecha {
 
     public void setAño(int y) {
         this.año = y;
+    }
+    
+    @Override
+    public String toString(){
+        return dia + "/" + mes + "/" + año;
     }
 }
