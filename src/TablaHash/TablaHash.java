@@ -1,6 +1,7 @@
 package TablaHash;
 
 import ClasesPrincipales.*;
+import java.math.BigInteger;
 import java.util.*;
 
 /**
@@ -34,11 +35,12 @@ public class TablaHash {
      * @return
      */
     public int hash(String clave){
+        BigInteger b = new BigInteger(String.valueOf(tamaño));
         int valorClave = 0;
         for(int i = 0; i < clave.length(); i++){
             valorClave = valorClave + Character.getNumericValue(clave.charAt(i));
         }
-        return valorClave % tamaño;
+        return valorClave % Integer.parseInt(b.nextProbablePrime().toString());
     }
     
     /**
