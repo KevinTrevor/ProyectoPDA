@@ -105,6 +105,9 @@ public class AplicacionPapeleria {
             System.out.println("Limite de caracteres excedido. Nombre aceptado: " + entrada);
         }
         nombreProducto = entrada;
+        
+        /* ACÁ EMPIEZA EL ERROR, ME VUELVE A LA SELECCION, Y AL DAR 
+        ENTER SE CREA UN BUCLE INFINITO*/
 
         existencia = inputI("Existencia (numero entero positivo): ");
         if (!validarPositivo(existencia)) {
