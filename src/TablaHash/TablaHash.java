@@ -90,6 +90,23 @@ public class TablaHash {
         return buscado;
     }
     
+    
+    public boolean existe(String clave){
+        int indice = hash(clave);
+        Producto buscado = null;
+        if(tabla[indice].isEmpty()){
+            return false;
+        }
+        else{
+            for(Producto p : tabla[indice]){
+                if(p.getReferencia().equals(clave)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
     /**
      *
      * @param clave

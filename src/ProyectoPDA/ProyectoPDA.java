@@ -23,7 +23,8 @@ public class ProyectoPDA {
         File articulos = new File("./ARTICULOS.txt");
         TablaHash tabla = new TablaHash(20);
         rutinaInicial(articulos, tabla);
-
+        AplicacionPapeleria app = new AplicacionPapeleria(tabla);
+        app.correr();
         System.out.println("");
         rutinaFinal(articulos, tabla);
         System.out.println("");
