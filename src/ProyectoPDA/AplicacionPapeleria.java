@@ -248,7 +248,7 @@ public class AplicacionPapeleria {
 
     public int inputI(String mensaje) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Selección: ");
+        System.out.print(mensaje);
         String seleccion = scanner.nextLine();
         if (validarEntero(seleccion)) {
             System.out.println("");
@@ -267,7 +267,7 @@ public class AplicacionPapeleria {
 
     public double inputD(String mensaje) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Selección: ");
+        System.out.print(mensaje);
         String seleccion = scanner.nextLine();
         if (validarDecimal(seleccion)) {
             System.out.println("");
