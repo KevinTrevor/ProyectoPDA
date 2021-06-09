@@ -18,9 +18,6 @@ public class TablaHash {
     public TablaHash(int max){
         tamaño = max;
         tabla = new LinkedList[max];
-        for(int i = 0; i < max; i++){
-            tabla[i] = new LinkedList();
-        }
     }
     
     public int getTamaño(){
@@ -51,7 +48,8 @@ public class TablaHash {
      */
     private void ingresar(String clave, Producto valor){
         int indice = hash(clave);
-        if(tabla[indice].isEmpty()){
+        if(tabla[indice] == null){
+            tabla[indice] = new LinkedList();
             tabla[indice].addLast(valor);
         }
         else{
@@ -77,7 +75,7 @@ public class TablaHash {
     public Producto buscar(String clave){
         int indice = hash(clave);
         Producto buscado = null;
-        if(tabla[indice].isEmpty()){
+        if(tabla[indice] == null){
             return null;
         }
         else{
@@ -93,8 +91,7 @@ public class TablaHash {
     
     public boolean existe(String clave){
         int indice = hash(clave);
-        Producto buscado = null;
-        if(tabla[indice].isEmpty()){
+        if(tabla[indice] == null){
             return false;
         }
         else{
@@ -135,16 +132,5 @@ public class TablaHash {
             }
         }
         return "";
-    }
-    
-    public static void main(String[] args) throws Exception{
-        Producto p = new Producto("ASD","Coco Blanchett", "Lapiz", 0, 1.2, new Fecha(07,06,2021));
-        Producto p1 = new Producto("DSA","Enrico Pucci", "Lapiz", 40, 1.2, new Fecha(07,06,2021));
-        TablaHash t = new TablaHash(15);
-        
-        t.ingresar(p.getReferencia(), p);
-        t.ingresar(p1.getReferencia(), p1);
-        
-        System.out.println(t.toString());
     }
 }
