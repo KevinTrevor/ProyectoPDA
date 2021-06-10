@@ -11,6 +11,7 @@ import java.util.*;
 public class TablaHash {
     LinkedList<Producto>[] tabla;
     int tamaño;
+    int cantidadElementos;
     
     /**
      *
@@ -19,6 +20,7 @@ public class TablaHash {
     public TablaHash(int max){
         tamaño = max;
         tabla = new LinkedList[max];
+        cantidadElementos = 0;
     }
     
     public int getTamaño(){
@@ -29,18 +31,16 @@ public class TablaHash {
         return tabla;
     }
     
-    /**
-     *
-     * @param clave
-     * @return
-     */
+    public boolean esVacio(){
+        return cantidadElementos == 0;
+    }
+    
     public int hash(String clave){
-        BigInteger b = new BigInteger(String.valueOf(tamaño));
         int valorClave = 0;
         for(int i = 0; i < clave.length(); i++){
             valorClave = valorClave + Character.getNumericValue(clave.charAt(i));
         }
-        return valorClave % Integer.parseInt(b.nextProbablePrime().toString());
+        return valorClave % tamaño;
     }
     
     /**
@@ -53,14 +53,17 @@ public class TablaHash {
         if(tabla[indice] == null){
             tabla[indice] = new LinkedList();
             tabla[indice].addLast(valor);
+            cantidadElementos++;
         }
         else{
             int posicionProducto = tabla[indice].indexOf(valor);
             if(posicionProducto != -1){
                 tabla[indice].set(posicionProducto, valor);
+                cantidadElementos++;
             }
             else{
                 tabla[indice].addLast(valor);
+                cantidadElementos++;
             }
         }
     }
@@ -74,11 +77,11 @@ public class TablaHash {
      * @param clave
      * @return
      */
-    public Producto buscar(String clave){
+    public Producto buscar(String clave)throws Exception{
         int indice = hash(clave);
         Producto buscado = null;
         if(tabla[indice] == null){
-            return null;
+            throw new Exception("Producto no existente.");
         }
         else{
             for(Producto p : tabla[indice]){
@@ -91,7 +94,8 @@ public class TablaHash {
     }
     
     
-    public boolean existe(String clave){
+    
+    public boolean existe(String clave) {
         int indice = hash(clave);
         if(tabla[indice] == null){
             return false;
@@ -119,7 +123,12 @@ public class TablaHash {
         else{
             eliminado.setReferencia("*");
             ingresar(clave, eliminado);
+            cantidadElementos--;
         }
+    }
+    
+    public void eliminar(Producto prod) throws Exception{
+        eliminar(prod.getReferencia());
     }
     
     @Override

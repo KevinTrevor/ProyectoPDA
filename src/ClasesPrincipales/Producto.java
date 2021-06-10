@@ -73,6 +73,10 @@ public class Producto {
         return ultimaSalida;
     }
     
+    public String getStringFormateado(){
+        return referencia+" "+distribuidor+" "+nombreProducto+" "+cantidad+" "+precio+" "+ultimaSalida;
+    }
+    
     // Métodos Setter
 
     public void setReferencia(String ref) {
