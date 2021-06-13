@@ -1,7 +1,7 @@
-package ProyectoPDA;
+package Papeleria;
 
-import ClasesPrincipales.*;
-import TablaHash.*;
+import TablaHash.TablaHash;
+import ClasesPrincipales.Producto;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  *
  * @author JESUS
  */
-public class ProyectoPDA {
+public class Papeleria {
 
     public static void main(String[] args) {
         //TO-DO: Estos metodos pueden ir en su propia clase.
@@ -23,11 +23,11 @@ public class ProyectoPDA {
         File articulos = new File("./ARTICULOS.txt");
         TablaHash tabla = new TablaHash(20);
         LinkedList<Producto> vendidos2020 = new LinkedList();
-        Inicializadores.rutinaInicial(articulos, tabla, vendidos2020);
-        AplicacionPapeleria app = new AplicacionPapeleria(tabla, vendidos2020);
+        Inicializador.rutinaInicial(articulos, tabla, vendidos2020);
+        Aplicacion app = new Aplicacion(tabla, vendidos2020);
         app.correr();
         System.out.println("");
-        Inicializadores.rutinaFinal(articulos, tabla);
+        Inicializador.rutinaFinal(articulos, tabla);
         System.out.println("");
     }
 

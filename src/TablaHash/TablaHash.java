@@ -1,6 +1,6 @@
 package TablaHash;
 
-import ClasesPrincipales.*;
+import ClasesPrincipales.Producto;
 import java.math.BigInteger;
 import java.util.*;
 

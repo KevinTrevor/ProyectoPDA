@@ -1,4 +1,4 @@
-package ProyectoPDA;
+package Papeleria;
 
 import ClasesPrincipales.Fecha;
 import ClasesPrincipales.Producto;
@@ -14,7 +14,7 @@ import java.util.Scanner;
  *
  * @author JESUS
  */
-public class Inicializadores {
+public class Inicializador {
 
     public static void rutinaInicial(File articulos, TablaHash tabla, LinkedList<Producto> vendidos2020) {
         try {
