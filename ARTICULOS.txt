@@ -1,3 +1,5 @@
-B54 Trebol_Neron Python_4 20 20.0 15/6/2020
-ASD Coco_Blanchett Lapiz 20 20.0 24/12/2000
+B54 Trebol_Neron Python_4 20 20.0 12/6/2021
+SI1 Nestor_Pendular Caf� 6 30.0 12/6/2020
+ASD Coco_Blanchett Lapiz 10 15.26 12/6/2021
+SIMP MisrraVB Mona_china 10 30.0 20/10/2005
 C52 Jesus_Raziel Java 20 20.0 24/12/2000

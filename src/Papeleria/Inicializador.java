@@ -16,6 +16,17 @@ import java.util.Scanner;
  */
 public class Inicializador {
 
+    /*
+    * Esta clase se encarga de manejar el archivo
+    */
+    
+    /**
+     * Inicializa el archivo. Si no existe en el directorio, lo crea. Si ya 
+     * existe, lo carga en memoria.
+     * @param articulos
+     * @param tabla
+     * @param vendidos2020
+     */
     public static void rutinaInicial(File articulos, TablaHash tabla, LinkedList<Producto> vendidos2020) {
         try {
             articulos.createNewFile();
@@ -32,6 +43,14 @@ public class Inicializador {
         }
     }
 
+    /**
+     * Carga el archivo en memoria. Para esto, lo lee y guarda los valores en
+     * la tabla hash
+     * @param archivo
+     * @param tabla
+     * @param vendidos2020
+     * @throws FileNotFoundException
+     */
     public static void cargarInventario(File archivo, TablaHash tabla, LinkedList<Producto> vendidos2020) throws FileNotFoundException {
         Scanner escaner = new Scanner(archivo);
         while (escaner.hasNextLine()) {
@@ -44,6 +63,12 @@ public class Inicializador {
         }
     }
 
+    /**
+     * Transforma los datos del Producto del archivo a la memoria, haciéndolos
+     * aptos para su manejo en el programa
+     * @param parametros
+     * @return
+     */
     public static Producto parsearProducto(String[] parametros) {
         Producto productoTemporal;
         String referencia = parametros[0];
@@ -56,12 +81,23 @@ public class Inicializador {
         return productoTemporal;
     }
 
+    /**
+     * Transforma los datos de la Fecha del archivo a la memoria, haciéndolos
+     * aptos para su manejo en el programa
+     * @param fechaString
+     * @return
+     */
     public static Fecha parsearFecha(String[] fechaString) {
         Fecha fechaTemporal;
         fechaTemporal = new Fecha(Integer.parseInt(fechaString[0]), Integer.parseInt(fechaString[1]), Integer.parseInt(fechaString[2]));
         return fechaTemporal;
     }
 
+    /**
+     * Guarda todos los datos de la memoria al archivo
+     * @param articulos
+     * @param tabla
+     */
     public static void rutinaFinal(File articulos, TablaHash tabla) {
         try {
             FileWriter fw = new FileWriter(articulos);
@@ -77,6 +113,13 @@ public class Inicializador {
 
     }
 
+    /**
+     * Actualiza el archivo. Para esto escribe los datos de la memoria al
+     * archivo
+     * @param nuevoArchivo
+     * @param fw
+     * @param tabla
+     */
     public static void actualizarArchivo(File nuevoArchivo, FileWriter fw, TablaHash tabla) {
         int n = tabla.getTamaño();
         LinkedList<Producto>[] tablaInterna = tabla.getTabla();
@@ -103,6 +146,12 @@ public class Inicializador {
         }
     }
 
+    /**
+     * Transforma los datos del producto de la memoria al archivo, haciéndolos
+     * aptos para su guardado
+     * @param prod
+     * @return
+     */
     public static String codificarProducto(Producto prod) {
         String referencia = prod.getReferencia();
         String nombreDistribuidor = prod.getDistribuidor().replace(' ', '_');

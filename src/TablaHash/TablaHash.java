@@ -14,7 +14,11 @@ public class TablaHash {
     int cantidadElementos;
     
     /**
-     *
+     * Crea una tabla hash con un espacio máximo. Esta tabla hash utiliza el 
+     * método de 'Resto de la División'. Y para lidiar con las colisiones se usa
+     * el método de 'Encadenamiento de Sinónimos', por lo tanto, se implementa
+     * como un arreglo que contiene en cada posición una lista enlazada de
+     * objetos tipo Producto.
      * @param max
      */
     public TablaHash(int max){
@@ -23,18 +27,36 @@ public class TablaHash {
         cantidadElementos = 0;
     }
     
+    /**
+     * Retorna el tamaño máximo de la tabla
+     * @return tamaño
+     */
     public int getTamaño(){
         return tamaño;
     }
     
+    /**
+     * Retorna la tabla
+     * @return tabla
+     */
     public LinkedList<Producto>[] getTabla(){
         return tabla;
     }
     
+    /**
+     * Determina si la tabla está vacía
+     * @return boolean
+     */
     public boolean esVacio(){
         return cantidadElementos == 0;
     }
     
+    /**
+     * Convierte la clave a su valor numérico y luego aplica el 'Resto de la 
+     * División' para conseguir la posición asignada al Producto
+     * @param clave
+     * @return int
+     */
     public int hash(String clave){
         int valorClave = 0;
         for(int i = 0; i < clave.length(); i++){
@@ -44,9 +66,9 @@ public class TablaHash {
     }
     
     /**
-     *
+     * Ingresa un Producto en la tabla
      * @param clave
-     * @param valor
+     * @param
      */
     private void ingresar(String clave, Producto valor){
         int indice = hash(clave);
@@ -68,14 +90,21 @@ public class TablaHash {
         }
     }
     
+    /**
+     * SOBRECARGA DE MÉTODOS
+     * Llama a la función anterior con el producto y su referencia, para 
+     * asegurarse de que el proceso de añadir se realizará el proceso con la 
+     * clave adecuada
+     * @param prod
+     */
     public void ingresar(Producto prod){
         ingresar(prod.getReferencia(), prod);
     }
     
     /**
-     *
+     * Busca el producto en la tabla
      * @param clave
-     * @return
+     * @return Producto
      */
     public Producto buscar(String clave)throws Exception{
         int indice = hash(clave);
@@ -93,8 +122,11 @@ public class TablaHash {
         return buscado;
     }
     
-    
-    
+    /**
+     * Determina si ya existe una Producto en la tabla que posea una clave dada
+     * @param clave
+     * @return boolean
+     */
     public boolean existe(String clave) {
         int indice = hash(clave);
         if(tabla[indice] == null){
@@ -111,7 +143,7 @@ public class TablaHash {
     }
     
     /**
-     *
+     * Elimina el Producto de la tabla
      * @param clave
      * @throws Exception
      */
@@ -127,10 +159,21 @@ public class TablaHash {
         }
     }
     
+    /**
+     * SOBRECARGA DE MÉTODOS
+     * Llama a la función anterior con el Producto y su referencia, para 
+     * asegurarse de que el proceso de eliminación se realiza con la clave
+     * adecuada
+     * @param prod
+     * @throws Exception
+     */
     public void eliminar(Producto prod) throws Exception{
         eliminar(prod.getReferencia());
     }
     
+    /*
+    * Retornar un String representando el objeto
+    */
     @Override
     public String toString(){
         for(int i = 0; i < tamaño; i++){

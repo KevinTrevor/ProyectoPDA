@@ -11,11 +11,24 @@ public class Aplicacion {
     TablaHash tabla;
     LinkedList<Producto> vendidos2020;
 
+    /*
+    * Esta clase se encarga de la lógica principal del proyecto
+    */
+    
+    /**
+     * Crea un objeto de tipo Aplicación
+     * @param tab
+     * @param v2020
+     */
     public Aplicacion(TablaHash tab, LinkedList<Producto> v2020) {
         tabla = tab;
         vendidos2020 = v2020;
     }
 
+    /**
+     * Es el método que corre el programa principal. Usa los menús, las entradas
+     * y las demás clases.
+     */
     public void correr() {
         Menu.mostrarMenu(true);
         int seleccion = Menu.opcionMenu();
@@ -82,6 +95,11 @@ public class Aplicacion {
 
     }
 
+    /**
+     * Añade un producto al programa. Lee todo los datos del mismo y luego llama
+     * a la tabla hash
+     * @throws Exception
+     */
     public void añadirProducto() throws Exception {
         Scanner scanner = new Scanner(System.in);
 
@@ -99,16 +117,24 @@ public class Aplicacion {
         tabla.ingresar(prod);
     }
 
+    /**
+     * Muestra los datos de un producto específico. Para eso primero obtiene su
+     * posición.
+     */
     public void consultarProducto() {
         Producto buscado = Entrada.obtenerProducto(tabla);
 
         if (buscado != null) {
-            System.out.println(buscado);
+            System.out.println(buscado.getStringFormateado());
         } else {
-            System.out.println("Producto inexistente.");
+            System.out.println("ERROR: Producto inexistente.");
         }
     }
 
+    /**
+     * Vende un producto. Para esto primero busca su posición y luego disminuye
+     * su cantidad en existencia
+     */
     public void venderProducto() {
         Producto buscado = Entrada.obtenerProducto(tabla);
         int cantidadAVender;
@@ -119,6 +145,7 @@ public class Aplicacion {
             if (!Validador.validarPositivo(cantidadAVender)) {
                 aceptado = false;
                 while (!aceptado) {
+                    System.out.println("ERROR: Debe introducir una cantidad válida");
                     cantidadAVender = Entrada.inputI("Cantidad a vender (numero entero positivo): ");
                     aceptado = Validador.validarPositivo(cantidadAVender);
                 }
@@ -127,14 +154,19 @@ public class Aplicacion {
                 Fecha fecha = Entrada.construirFecha("venta");
                 buscado.setUltimaSalida(fecha);
                 buscado.setCantidad(buscado.getCantidad() - cantidadAVender);
+                System.out.println("Producto Vendido");
             } else {
-                System.out.println("Cantidad a vender sobrepasa existencia actual del producto.");
+                System.out.println("ERROR: Cantidad a vender sobrepasa existencia actual del producto.");
             }
         } else {
-            System.out.println("Producto inexistente");
+            System.out.println("ERROR: Producto inexistente");
         }
     }
 
+    /**
+     * Compra un producto al proveedor. Para esto primero busca su posición y 
+     * luego aumenta su cantidad en existencia.
+     */
     public void comprarProducto() {
         Producto buscado = Entrada.obtenerProducto(tabla);
         int cantidadAComprar;
@@ -145,22 +177,26 @@ public class Aplicacion {
             if (!Validador.validarPositivo(cantidadAComprar)) {
                 aceptado = false;
                 while (!aceptado) {
+                    System.out.println("ERROR: Debe introducir una cantidad válida");
                     cantidadAComprar = Entrada.inputI("Cantidad a comprar a proveedor (numero entero positivo): ");
                     aceptado = Validador.validarPositivo(cantidadAComprar);
                 }
             }
             buscado.setCantidad(buscado.getCantidad() + cantidadAComprar);
+            System.out.println("Producto Comprado");
         } else {
-            System.out.println("Producto inexistente");
+            System.out.println("ERROR: Producto inexistente");
         }
     }
 
+    /**
+     * Muestra los datos de todos los productos disponibles.
+     */
     public void listarDisponibles() {
         if (tabla.esVacio()) {
             System.out.println("No hay productos disponibles.");
         } else {
             System.out.println("PRODUCTOS DISPONIBLES");
-            System.out.println("REF. DIST. NOM. EXIST. PREC. FECH.");
             int n = tabla.getTamaño();
             LinkedList<Producto>[] tablaInterna = tabla.getTabla();
             for (int i = 0; i < n; i++) {
@@ -175,18 +211,25 @@ public class Aplicacion {
         }
     }
 
+    /**
+     * Muestra los datos de los productos vendidos por última vez en 2020.
+     */
     public void listarVendidos2020() {
         if (vendidos2020.isEmpty()) {
             System.out.println("No se han vendido productos en 2020.");
         } else {
             System.out.println("PRODUCTOS VENDIDOS EN 2020");
-            System.out.println("REF. DIST. NOM. EXIST. PREC. FECH.");
             for (Producto e : vendidos2020) {
                 System.out.println(e.getStringFormateado());
             }
         }
     }
 
+    /**
+     * Modifica los datos de un producto. Para esto primero busca su posición y
+     * luego se vale de otras clases para interactuar con el usuario y actualizar
+     * los datos.
+     */
     public void modificarProducto() {
         Producto buscado = Entrada.obtenerProducto(tabla);
         boolean aceptado;
@@ -244,24 +287,29 @@ public class Aplicacion {
                 vendidos2020.remove(buscado);
             }
         } else {
-            System.out.println("Producto inexistente");
+            System.out.println("ERROR: Producto inexistente");
         }
     }
 
+    /**
+     * Elimina un producto específico. Para esto primero busca su posición en la
+     * tabla hash
+     */
     public void eliminarProducto() {
         Producto buscado = Entrada.obtenerProducto(tabla);
 
         if (buscado != null) {
             try {
                 tabla.eliminar(buscado);
+                System.out.println("Producto Eliminado");
                 if (buscado.getUltimaSalida().getAño() == 2020) {
                     vendidos2020.remove(buscado);
                 }
             } catch (Exception ex) {
-                System.out.println("No se pudo eliminar el producto.");
+                System.out.println("ERRO: No se pudo eliminar el producto.");
             }
         } else {
-            System.out.println("Producto inexistente.");
+            System.out.println("ERROR: Producto inexistente.");
         }
     }
 

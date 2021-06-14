@@ -11,8 +11,19 @@ import java.util.Scanner;
  */
 public class Entrada {
     
+    /*
+    * Esta clase se encarga leer todos los datos introducidos por el usuario.
+    * Trabaja en conjunto con la clase 'Validador'
+    */
+
+    /**
+     * Realiza la entrada de un número entero
+     * @param mensaje
+     * @return
+     */    
     public static int inputI(String mensaje) {
         Scanner scanner = new Scanner(System.in);
+        System.out.println();
         System.out.print(mensaje);
         String seleccion = scanner.nextLine();
         if (Validador.validarEntero(seleccion)) {
@@ -22,7 +33,9 @@ public class Entrada {
             boolean aceptado = false;
             while (!aceptado) {
                 System.out.println("");
+                System.out.println("ERROR: Debe introducir un numero entero positivo");
                 System.out.print(mensaje);
+                seleccion = scanner.nextLine();
                 aceptado = Validador.validarEntero(seleccion);
             }
             System.out.println("");
@@ -30,6 +43,11 @@ public class Entrada {
         }
     }
 
+    /**
+     * Realiza la entrada de un número decimal (double)
+     * @param mensaje
+     * @return
+     */
     public static double inputD(String mensaje) {
         Scanner scanner = new Scanner(System.in);
         System.out.print(mensaje);
@@ -41,7 +59,9 @@ public class Entrada {
             boolean aceptado = false;
             while (!aceptado) {
                 System.out.println("");
+                System.out.println("ERROR: Debe introducir un número decimal");
                 System.out.print(mensaje);
+                seleccion = scanner.nextLine();
                 aceptado = Validador.validarDecimal(seleccion);
             }
             System.out.println("");
@@ -49,6 +69,14 @@ public class Entrada {
         }
     }
 
+    /**
+     * Realiza la entrada de la referencia de un producot. En caso de que la 
+     * cadena introducida supere el límite de caracteres, la corta. También 
+     * evita que se introduzca una referencia ya existente
+     * @param scanner
+     * @param tabla
+     * @return
+     */
     public static String pedirReferencia(Scanner scanner, TablaHash tabla){
         String entrada;
         boolean aceptado;
@@ -63,7 +91,7 @@ public class Entrada {
             aceptado = false;
             while (!aceptado) {
                 System.out.println("");
-                System.out.print("Articulo existente. Introducir referencia (10 caracteres max: ");
+                System.out.print("ERROR: Articulo ya existente. Introducir referencia (10 caracteres max: ");
                 entrada = scanner.nextLine();
                 if (entrada.length() > 10) {
                     entrada = entrada.substring(0, 9);
@@ -75,6 +103,12 @@ public class Entrada {
         return entrada;
     }
     
+    /**
+     * Realiza la entrada de la Distribuidora. En caso de que la cadena 
+     * introducida supere el límite de caracteres, la corta.
+     * @param scanner
+     * @return
+     */
     public static String pedirDistribuidora(Scanner scanner){
         String entrada;
         boolean aceptado;
@@ -88,6 +122,12 @@ public class Entrada {
         return entrada;
     }
     
+    /**
+     * Realiza la entrada de la Distribuidora. En caso de que la cadena 
+     * introducida supere el límite de caracteres, la corta.
+     * @param scanner
+     * @return
+     */
     public static String pedirNombreProducto(Scanner scanner){
         String entrada;
         boolean aceptado;
@@ -101,13 +141,20 @@ public class Entrada {
         return entrada;
     }
     
+    /**
+     * Realiza la entrada de la cantidad en existencia de un producto
+     * @param scanner
+     * @return
+     */
     public static int pedirExistencia(Scanner scanner){
         int existencia;
         boolean aceptado;
+        System.out.println();
         existencia = inputI("Existencia (numero entero positivo): ");
         if (!Validador.validarPositivo(existencia)) {
             aceptado = false;
             while (!aceptado) {
+                System.out.println("ERROR: Debe introducir una número válido");
                 existencia = inputI("Existencia (numero entero positivo): ");
                 aceptado = Validador.validarPositivo(existencia);
             }
@@ -115,6 +162,11 @@ public class Entrada {
         return existencia;
     }
     
+    /**
+     * Realiza la entrada del precio de un producto.
+     * @param scanner
+     * @return
+     */
     public static double pedirPrecio(Scanner scanner){
         double precio;
         boolean aceptado;
@@ -122,6 +174,7 @@ public class Entrada {
         if (!Validador.validarPositivo(precio)) {
             aceptado = false;
             while (!aceptado) {
+                System.out.println("ERROR: Debe introducir un número válido");
                 precio = inputD("Precio (numero decimal): ");
                 aceptado = Validador.validarPositivo(precio);
             }
@@ -129,6 +182,11 @@ public class Entrada {
         return precio;
     }
     
+    /**
+     * Lee una fecha en forma de cadena y crea un objeto a partir de la misma.
+     * @param modo
+     * @return
+     */
     public static Fecha construirFecha(String modo) {
         Fecha retornable;
 
@@ -136,9 +194,9 @@ public class Entrada {
         boolean aceptado;
 
         if (modo.equals("general")) {
-            System.out.println("Introducir fecha (dd/mm/yyyy): ");
+            System.out.print("Introducir fecha (dd/mm/yyyy): ");
         } else if (modo.equals("venta")) {
-            System.out.println("Introducir fecha de venta (dd/mm/yyyy): ");
+            System.out.print("Introducir fecha de venta (dd/mm/yyyy): ");
         }
         String fecha = sc.next();
 
@@ -148,7 +206,7 @@ public class Entrada {
         } else {
             aceptado = false;
             while (!aceptado) {
-                System.out.println("Introducir fecha (dd/mm/yyyy): ");
+                System.out.print("ERROR: Debe introducir una cadena de tipo (dd/mm/yyyy): ");
                 fecha = sc.next();
                 aceptado = Validador.validarFecha(fecha);
             }
@@ -158,11 +216,17 @@ public class Entrada {
         return retornable;
     }
     
+    /**
+     * Pregunta si el usuario desea introducir una fecha. En caso positivo,
+     * llama al método anterior para leerla y convertirla en un objeto. En caso
+     * negativo, no hace nada.
+     * @param scanner
+     * @return
+     */
     public static Fecha pedirFecha(Scanner scanner){
         String entrada;
         boolean aceptado;
         Fecha fecha;
-        System.out.println("");
         System.out.print("¿Incluir fecha de ultima venta? (s/n): ");
         entrada = scanner.nextLine();
         if (entrada.equalsIgnoreCase("s") || entrada.equalsIgnoreCase("n")) {
@@ -187,6 +251,12 @@ public class Entrada {
         return fecha;
     }
     
+    /**
+     * Realiza la entrada de la referencia de un artícula y utiliza la función
+     * hash para conseguir su posición.
+     * @param tabla
+     * @return
+     */
     public static Producto obtenerProducto(TablaHash tabla) {
         String entrada;
         Scanner scanner = new Scanner(System.in);

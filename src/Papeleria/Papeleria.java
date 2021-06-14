@@ -16,9 +16,8 @@ import java.util.logging.Logger;
  * @author JESUS
  */
 public class Papeleria {
-
+    //Método Main
     public static void main(String[] args) {
-        //TO-DO: Estos metodos pueden ir en su propia clase.
         
         File articulos = new File("./ARTICULOS.txt");
         TablaHash tabla = new TablaHash(20);
